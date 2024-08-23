@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.9.0/localforage.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- <h1 id="practiceHeader">Figure Drawing Practice</h1> -->
+        <div id="imageWrapper">
+            <img id="practiceImage" alt="Drawing Practice">
+            <div id="overlay"></div> <!-- Overlay for paused state -->
+        </div>
+        <div id="footer">
+            <div id="timer">0</div>
+            <div class="buttons">
+                <button id="pauseButton">⏸</button>
+                <button id="skipButton">⏯</button>
+            </div>
+        </div>
+        <div id="breakScreen" style="display:none;">
+            <h1>Break Time</h1>
+            <div id="breakTimer">0</div>
+            <button id="skipBreakButton">Skip Break</button>
+        </div>
+        <div id="outOfImages" style="display:none;">
+            <p>You are out of images.</p>
+            <button id="backToIndex">Back to Index</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

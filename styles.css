@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    background-color: rgb(23, 23, 26);
+}
+
+body {
+    font-family: "Raleway", Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: rgb(23, 23, 26);
+    color: beige;
+}
+
+.container {
+    text-align: center;
+    position: relative; /* Ensure container is positioned for overlay */
+}
+
+h1 {
+    font-weight: 900;
+    font-size: 4em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+label {
+    margin: 5px 0;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+input {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#interval, #breakTime {
+    background-color: beige;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: beige;
+    border: none;
+}
+
+#practiceImage {
+    max-width: 100%;
+    max-height: 90vh;
+    position: relative; /* Ensure image is positioned for overlay */
+}
+
+#overlay {
+    position: fixed; /* Fix position so it covers the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(23, 23, 26, 0.97);
+    display: none; /* Hidden by default */
+    z-index: 2; /* Ensure overlay is above the image but below buttons */
+}
+
+#timer {
+    font: Arial;
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+#breakTimer {
+    font: Arial;
+    font-size: 6em;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+}
+
+#footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+    position: relative;
+    z-index: 3; /* Ensure footer is above the overlay */
+}
+
+#pauseButton, #skipButton {
+    background: none;
+    color: beige;
+    font-size: 2em;
+}
+
+#startButton {
+    border: 2px solid beige;
+    border-radius: 3px;
+    background-color: none;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 1.2em;
+}

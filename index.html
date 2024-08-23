@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figure Drawing Practice</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.9.0/localforage.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Figure Drawing Practice</h1>
+        <form id="startForm">
+            <label for="interval">Interval:</label>
+            <input type="number" id="interval" name="interval" min="1" required placeholder="seconds">
+            
+            <label for="breakTime">Break Time:</label>
+            <input type="number" id="breakTime" name="breakTime" min="0" placeholder="seconds (Optional)">
+            
+            <label for="images">Upload Images:</label>
+            <input type="file" id="images" name="images" accept="image/*" multiple required>
+            
+            <button type="submit" id="startButton">Start</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
