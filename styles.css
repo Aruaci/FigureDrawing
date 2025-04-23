@@ -1,115 +1,314 @@
+/* styles.css */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-* {
-    background-color: rgb(23, 23, 26);
+:root {
+    /* Dark Mode (Default) Variables */
+    --background-color: #1a1a1d;
+    --text-color: #f5f5dc;
+    --primary-color: #9a70b6;
+    --input-background: #2c2c31;
+    --border-color: #444;
+    --button-text-color: var(--background-color);
+    --overlay-color: rgba(26, 26, 29, 0.95);
+    --icon-color: var(--text-color);
+    --icon-hover-color: var(--primary-color);
+    --heading-color: var(--primary-color);
+    --button-secondary-bg: var(--input-background);
+    --button-secondary-text: var(--primary-color);
+    --button-secondary-border: var(--primary-color);
+    --button-secondary-hover-bg: var(--border-color);
 }
 
+body.light-mode {
+    /* Light Mode Variables */
+    --background-color: #f4f4f4;
+    --text-color: #333333;
+    --primary-color: #8a6d4d; /* Darker shade for light mode contrast */
+    --input-background: #ffffff;
+    --border-color: #cccccc;
+    --button-text-color: #ffffff; /* White text on primary buttons */
+    --overlay-color: rgba(255, 255, 255, 0.9);
+    --icon-color: var(--text-color);
+    --icon-hover-color: var(--primary-color);
+    --heading-color: #5a452d; /* Even darker heading */
+    --button-secondary-bg: #e0e0e0;
+    --button-secondary-text: var(--primary-color);
+    --button-secondary-border: var(--primary-color);
+    --button-secondary-hover-bg: #d0d0d0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* Add transition for smooth color changes */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Apply variables to elements */
 body {
     font-family: "Raleway", Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: rgb(23, 23, 26);
-    color: beige;
+    min-height: 100vh;
+    background-color: var(--background-color); /* Use variable */
+    color: var(--text-color);                 /* Use variable */
+    line-height: 1.6;
+    padding-top: 60px; /* Add padding to prevent content from going under fixed button */
 }
 
 .container {
     text-align: center;
-    position: relative; /* Ensure container is positioned for overlay */
+    padding: 20px;
+    max-width: 900px;
+    width: 100%;
+    /* Removed position: relative; as button is now fixed */
 }
+
+/* Style the theme toggle button - FIXED TOP LEFT */
+.theme-toggle-button {
+    position: fixed; /* Position relative to the viewport */
+    top: 15px;       /* Distance from top */
+    right: 15px;      /* Distance from left */
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 5px 8px;
+    border-radius: 5px;
+    line-height: 1;
+    z-index: 100; /* Ensure it's above other content */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.theme-toggle-button:hover {
+    background-color: var(--input-background);
+    transform: scale(1.1);
+}
+
 
 h1 {
-    font-weight: 900;
-    font-size: 4em;
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 3.5em;
+    color: var(--heading-color); /* Use variable */
+    margin-bottom: 30px;
 }
 
+/* Update other elements to use variables */
+
+/* FORM - COLUMN LAYOUT */
 form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    align-items: stretch; /* Stretch items horizontally */
+    gap: 15px;
+    margin: 0 auto 20px auto; /* Center form horizontally */
+    max-width: 400px; /* Set a max-width for the form */
+    width: 90%;       /* Make form responsive */
 }
+
 
 label {
-    margin: 5px 0;
     font-weight: bold;
-    font-size: 2em;
+    font-size: 1.5em;
+    color: var(--text-color); /* Use variable */
+    text-align: left; /* Align labels left for standard form look */
+    margin-bottom: -5px; /* Reduce gap slightly */
 }
 
-input {
-    padding: 5px;
+/* INPUTS - FULL WIDTH */
+input[type="number"],
+input[type="file"] {
+    padding: 10px 15px;
     margin-bottom: 10px;
+    background-color: var(--input-background); /* Use variable */
+    color: var(--text-color);                 /* Use variable */
+    border: 1px solid var(--border-color);     /* Use variable */
+    border-radius: 5px;
+    font-family: "Raleway", sans-serif;
+    font-size: 1em;
+    width: 100%;     /* Fill the form column */
+    max-width: none; /* Remove previous max-width */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-#interval, #breakTime {
-    background-color: beige;
+
+input[type="number"]:focus,
+input[type="file"]:focus {
+    outline: none;
+    border-color: var(--primary-color); /* Use variable */
+    box-shadow: 0 0 5px var(--primary-color); /* Adjust alpha if needed */
 }
 
-button {
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: beige;
+/* Adjust file input button for light/dark modes */
+input[type="file"]::file-selector-button {
+    background-color: var(--primary-color);
+    color: var(--button-text-color); /* Use specific button text color */
     border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+input[type="file"]::file-selector-button:hover {
+    opacity: 0.9; /* Simple hover effect */
+}
+
+
+/* General Button Styles */
+button {
+    padding: 12px 25px;
+    cursor: pointer;
+    background-color: var(--primary-color); /* Use variable */
+    color: var(--button-text-color);      /* Use variable */
+    border: none;
+    border-radius: 5px;
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    opacity: 0.9; /* Simple hover effect */
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Specific Button Overrides if needed */
+#pauseButton, #skipButton {
+    background: none;
+    color: var(--icon-color); /* Use icon color variable */
+    font-size: 2em;
+    padding: 5px 10px;
+    border: none;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+#pauseButton:hover, #skipButton:hover {
+    color: var(--icon-hover-color); /* Use icon hover color variable */
+    background: none;
+    transform: scale(1.1);
+}
+#pauseButton:active, #skipButton:active {
+     transform: scale(1);
+}
+
+#skipBreakButton {
+     background-color: var(--button-secondary-bg);
+     color: var(--button-secondary-text);
+     border: 1px solid var(--button-secondary-border);
+}
+#skipBreakButton:hover {
+      background-color: var(--button-secondary-hover-bg);
+      transform: translateY(-2px); /* Add hover effect */
+}
+
+/* Ensure startButton uses general styles but can have margin etc */
+#startButton {
+    margin-top: 15px;
+    align-self: center; /* Center the start button within the form */
+    width: auto; /* Allow button to size naturally */
+    min-width: 150px; /* Optional: Give it a minimum width */
+}
+
+
+#backToIndex {
+     /* Uses general button styles */
 }
 
 #practiceImage {
     max-width: 100%;
-    max-height: 90vh;
-    position: relative; /* Ensure image is positioned for overlay */
+    max-height: 85vh;
+    display: block;
+    margin: 0 auto 15px auto;
+    border: 1px solid var(--border-color); /* Use variable */
+    border-radius: 3px;
+}
+
+#imageWrapper {
+     position: relative;
 }
 
 #overlay {
-    position: fixed; /* Fix position so it covers the entire viewport */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(23, 23, 26, 0.97);
-    display: none; /* Hidden by default */
-    z-index: 2; /* Ensure overlay is above the image but below buttons */
-}
-
-#timer {
-    font: Arial;
-    font-size: 2em;
-    margin: 20px 0;
-}
-
-#breakTimer {
-    font: Arial;
-    font-size: 6em;
-}
-
-.buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 5px;
+    background-color: var(--overlay-color); /* Use variable */
+    display: none;
+    z-index: 2;
+    backdrop-filter: blur(3px);
 }
 
 #footer {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 5px;
+    align-items: center;
+    gap: 20px;
     position: relative;
-    z-index: 3; /* Ensure footer is above the overlay */
-}
-
-#pauseButton, #skipButton {
-    background: none;
-    color: beige;
-    font-size: 2em;
-}
-
-#startButton {
-    border: 2px solid beige;
-    border-radius: 3px;
-    background-color: none;
-    font-weight: bold;
+    z-index: 3;
     margin-top: 10px;
+}
+
+#timer {
+    font-family: "Raleway", Arial, sans-serif;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--primary-color); /* Use variable */
+    min-width: 50px;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+
+#breakScreen {
+    background-color: var(--background-color); /* Use variable */
+     display: none; /* Controlled by JS */
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: 10;
+     display: flex; /* Use flex */
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     padding: 20px;
+}
+
+
+#breakTimer {
+    font-family: "Raleway", Arial, sans-serif;
+    font-size: 6em;
+    color: var(--primary-color); /* Use variable */
+    margin-bottom: 30px;
+}
+
+#outOfImages {
+     display: none; /* Controlled by JS */
+     padding: 30px;
+     text-align: center; /* Center content */
+}
+
+#outOfImages p {
     font-size: 1.2em;
+    margin-bottom: 20px;
+    color: var(--text-color); /* Use variable */
 }
