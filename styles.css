@@ -1,12 +1,14 @@
 /* styles.css */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* --- Theme Variables --- */
+
+/* Default Theme: Dark */
 :root {
-    /* Dark Mode (Default) Variables */
     --background-color: #1a1a1d;
     --text-color: #f5f5dc;
-    --primary-color: #9a70b6;
+    --primary-color: #b4bcfa; /* Warm beige/brown */
     --input-background: #2c2c31;
     --border-color: #444;
     --button-text-color: var(--background-color);
@@ -20,33 +22,148 @@
     --button-secondary-hover-bg: var(--border-color);
 }
 
-body.light-mode {
-    /* Light Mode Variables */
+/* Light Theme */
+body.theme-light {
     --background-color: #f4f4f4;
     --text-color: #333333;
-    --primary-color: #8a6d4d; /* Darker shade for light mode contrast */
+    --primary-color: #8a6d4d; /* Darker brown */
     --input-background: #ffffff;
     --border-color: #cccccc;
-    --button-text-color: #ffffff; /* White text on primary buttons */
+    --button-text-color: #ffffff;
     --overlay-color: rgba(255, 255, 255, 0.9);
     --icon-color: var(--text-color);
     --icon-hover-color: var(--primary-color);
-    --heading-color: #5a452d; /* Even darker heading */
+    --heading-color: #5a452d;
     --button-secondary-bg: #e0e0e0;
     --button-secondary-text: var(--primary-color);
     --button-secondary-border: var(--primary-color);
     --button-secondary-hover-bg: #d0d0d0;
 }
 
+/* Sepia Theme */
+body.theme-sepia {
+    --background-color: #f4ecd8; /* Creamy background */
+    --text-color: #5b4636;      /* Dark brown text */
+    --primary-color: #8d6e63; /* Muted brown */
+    --input-background: #efe2cc;
+    --border-color: #dcd0b8;
+    --button-text-color: var(--background-color);
+    --overlay-color: rgba(244, 236, 216, 0.9);
+    --icon-color: var(--text-color);
+    --icon-hover-color: #795548; /* Darker brown */
+    --heading-color: #795548;
+    --button-secondary-bg: var(--input-background);
+    --button-secondary-text: var(--primary-color);
+    --button-secondary-border: var(--primary-color);
+    --button-secondary-hover-bg: #d7ccc8;
+}
+
+/* Slate Theme */
+body.theme-slate {
+    --background-color: #263238; /* Dark blue-grey */
+    --text-color: #eceff1;      /* Light grey text */
+    --primary-color: #607d8b; /* Lighter blue-grey */
+    --input-background: #37474f;
+    --border-color: #546e7a;
+    --button-text-color: #ffffff;
+    --overlay-color: rgba(38, 50, 56, 0.95);
+    --icon-color: var(--text-color);
+    --icon-hover-color: #90a4ae; /* Even lighter grey */
+    --heading-color: #90a4ae;
+    --button-secondary-bg: var(--input-background);
+    --button-secondary-text: var(--primary-color);
+    --button-secondary-border: var(--primary-color);
+    --button-secondary-hover-bg: #455a64;
+}
+
+body.theme-coral-blue {
+    --background-color: #F7F8F3;      /* Off-white */
+    --text-color: #002C3E;          /* Dark Navy */
+    --primary-color: #F7444E;         /* Coral */
+    --input-background: #FFFFFF;      /* White */
+    --border-color: #DDE2E0;          /* Light Greyish */
+    --button-text-color: #FFFFFF;      /* White */
+    --overlay-color: rgba(247, 248, 243, 0.9); /* Semi-transparent Off-white */
+    --icon-color: hwb(186 47% 23%);             /* Teal Blue */
+    --icon-hover-color: var(--primary-color); /* Coral */
+    --heading-color: var(--primary-color);    /* Coral */
+    --button-secondary-bg: transparent;        /* Transparent */
+    --button-secondary-text: #78BCC4;         /* Teal Blue */
+    --button-secondary-border: #78BCC4;        /* Teal Blue */
+    --button-secondary-hover-bg: rgba(120, 188, 196, 0.1); /* Light Teal Highlight */
+}
+
+body.theme-dark {
+    --background-color: #1a1a1d;
+    --text-color: #f5f5dc;
+    --primary-color: #b4bcfa;
+    --input-background: #2c2c31;
+    --border-color: #444;
+    --button-text-color: var(--background-color);
+    --overlay-color: rgba(26, 26, 29, 0.95);
+    --icon-color: var(--text-color);
+    --icon-hover-color: var(--primary-color);
+    --heading-color: var(--primary-color);
+    --button-secondary-bg: var(--input-background);
+    --button-secondary-text: var(--primary-color);
+    --button-secondary-border: var(--primary-color);
+    --button-secondary-hover-bg: var(--border-color);
+}
+
+/* --- General Styles --- */
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /* Add transition for smooth color changes */
-    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Smoother transitions for theme changes */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Apply variables to elements */
+/* Visually Hidden Class for Accessibility */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* Avoids screen reader reading spaces */
+}
+
+
+/* --- Theme Selector Dropdown Styling --- */
+.theme-selector-wrapper {
+    position: fixed; /* Position relative to the viewport */
+    top: 15px;
+    left: 15px;
+    z-index: 100;
+}
+
+.theme-selector {
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-family: "Raleway", sans-serif;
+    font-size: 0.9em;
+    cursor: pointer;
+    min-width: 100px; /* Give it some base width */
+}
+
+.theme-selector:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 3px var(--primary-color);
+}
+
+/* Remove the old theme toggle button rule */
+/* .theme-toggle-button { ... } */
+
+
+/* --- Rest of the styles (body, container, h1, form, inputs, buttons, etc.) --- */
+/* Make sure all elements using colors use the CSS variables defined above */
+/* No changes needed to the structure of the rest of the CSS if variables were used consistently */
+
 body {
     font-family: "Raleway", Arial, sans-serif;
     display: flex;
@@ -56,7 +173,7 @@ body {
     background-color: var(--background-color); /* Use variable */
     color: var(--text-color);                 /* Use variable */
     line-height: 1.6;
-    padding-top: 60px; /* Add padding to prevent content from going under fixed button */
+    padding-top: 70px; /* Adjust padding slightly for dropdown */
 }
 
 .container {
@@ -64,90 +181,59 @@ body {
     padding: 20px;
     max-width: 900px;
     width: 100%;
-    /* Removed position: relative; as button is now fixed */
 }
-
-/* Style the theme toggle button - FIXED TOP LEFT */
-.theme-toggle-button {
-    position: fixed; /* Position relative to the viewport */
-    top: 15px;       /* Distance from top */
-    right: 15px;      /* Distance from left */
-    background: none;
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    font-size: 1.5em;
-    cursor: pointer;
-    padding: 5px 8px;
-    border-radius: 5px;
-    line-height: 1;
-    z-index: 100; /* Ensure it's above other content */
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-}
-
-.theme-toggle-button:hover {
-    background-color: var(--input-background);
-    transform: scale(1.1);
-}
-
 
 h1 {
-    font-family: "Playfair Display", serif;
+    font-family: "Special Gothic Expanded One";
     font-weight: 700;
     font-size: 3.5em;
     color: var(--heading-color); /* Use variable */
     margin-bottom: 30px;
 }
 
-/* Update other elements to use variables */
-
-/* FORM - COLUMN LAYOUT */
 form {
     display: flex;
     flex-direction: column;
-    align-items: stretch; /* Stretch items horizontally */
+    align-items: stretch;
     gap: 15px;
-    margin: 0 auto 20px auto; /* Center form horizontally */
-    max-width: 400px; /* Set a max-width for the form */
-    width: 90%;       /* Make form responsive */
+    margin: 0 auto 20px auto;
+    max-width: 400px;
+    width: 90%;
 }
-
 
 label {
     font-weight: bold;
     font-size: 1.5em;
-    color: var(--text-color); /* Use variable */
-    text-align: left; /* Align labels left for standard form look */
-    margin-bottom: -5px; /* Reduce gap slightly */
+    color: var(--text-color);
+    text-align: left;
+    margin-bottom: -5px;
 }
 
-/* INPUTS - FULL WIDTH */
 input[type="number"],
 input[type="file"] {
     padding: 10px 15px;
     margin-bottom: 10px;
-    background-color: var(--input-background); /* Use variable */
-    color: var(--text-color);                 /* Use variable */
-    border: 1px solid var(--border-color);     /* Use variable */
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     font-family: "Raleway", sans-serif;
     font-size: 1em;
-    width: 100%;     /* Fill the form column */
-    max-width: none; /* Remove previous max-width */
+    width: 100%;
+    max-width: none;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
 
 input[type="number"]:focus,
 input[type="file"]:focus {
     outline: none;
-    border-color: var(--primary-color); /* Use variable */
-    box-shadow: 0 0 5px var(--primary-color); /* Adjust alpha if needed */
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
 }
 
-/* Adjust file input button for light/dark modes */
 input[type="file"]::file-selector-button {
     background-color: var(--primary-color);
-    color: var(--button-text-color); /* Use specific button text color */
+    color: var(--button-text-color);
     border: none;
     padding: 8px 12px;
     border-radius: 4px;
@@ -157,26 +243,24 @@ input[type="file"]::file-selector-button {
 }
 
 input[type="file"]::file-selector-button:hover {
-    opacity: 0.9; /* Simple hover effect */
+    opacity: 0.9;
 }
 
-
-/* General Button Styles */
 button {
     padding: 12px 25px;
     cursor: pointer;
-    background-color: var(--primary-color); /* Use variable */
-    color: var(--button-text-color);      /* Use variable */
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
     border: none;
     border-radius: 5px;
     font-family: "Raleway", sans-serif;
     font-weight: bold;
     font-size: 1.1em;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease; /* Added color transition */
 }
 
 button:hover {
-    opacity: 0.9; /* Simple hover effect */
+    opacity: 0.9;
     transform: translateY(-2px);
 }
 
@@ -184,10 +268,9 @@ button:active {
     transform: translateY(0);
 }
 
-/* Specific Button Overrides if needed */
 #pauseButton, #skipButton {
     background: none;
-    color: var(--icon-color); /* Use icon color variable */
+    color: var(--icon-color);
     font-size: 2em;
     padding: 5px 10px;
     border: none;
@@ -195,7 +278,7 @@ button:active {
 }
 
 #pauseButton:hover, #skipButton:hover {
-    color: var(--icon-hover-color); /* Use icon hover color variable */
+    color: var(--icon-hover-color);
     background: none;
     transform: scale(1.1);
 }
@@ -210,20 +293,18 @@ button:active {
 }
 #skipBreakButton:hover {
       background-color: var(--button-secondary-hover-bg);
-      transform: translateY(-2px); /* Add hover effect */
+      transform: translateY(-2px);
 }
 
-/* Ensure startButton uses general styles but can have margin etc */
 #startButton {
     margin-top: 15px;
-    align-self: center; /* Center the start button within the form */
-    width: auto; /* Allow button to size naturally */
-    min-width: 150px; /* Optional: Give it a minimum width */
+    align-self: center;
+    width: auto;
+    min-width: 150px;
 }
 
-
 #backToIndex {
-     /* Uses general button styles */
+    /* Uses general button styles */
 }
 
 #practiceImage {
@@ -231,8 +312,9 @@ button:active {
     max-height: 85vh;
     display: block;
     margin: 0 auto 15px auto;
-    border: 1px solid var(--border-color); /* Use variable */
+    border: 1px solid var(--border-color);
     border-radius: 3px;
+    background-color: var(--input-background); /* Add background for images with transparency */
 }
 
 #imageWrapper {
@@ -245,7 +327,7 @@ button:active {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--overlay-color); /* Use variable */
+    background-color: var(--overlay-color);
     display: none;
     z-index: 2;
     backdrop-filter: blur(3px);
@@ -266,7 +348,7 @@ button:active {
     font-family: "Raleway", Arial, sans-serif;
     font-size: 1.8em;
     font-weight: bold;
-    color: var(--primary-color); /* Use variable */
+    color: var(--primary-color);
     min-width: 50px;
     text-align: center;
 }
@@ -276,9 +358,8 @@ button:active {
     gap: 10px;
 }
 
-
 #breakScreen {
-    background-color: var(--background-color); /* Use variable */
+    background-color: var(--background-color);
      display: none; /* Controlled by JS */
      position: fixed;
      top: 0;
@@ -286,29 +367,28 @@ button:active {
      width: 100%;
      height: 100%;
      z-index: 10;
-     display: flex; /* Use flex */
+     display: flex;
      flex-direction: column;
      justify-content: center;
      align-items: center;
      padding: 20px;
 }
 
-
 #breakTimer {
     font-family: "Raleway", Arial, sans-serif;
     font-size: 6em;
-    color: var(--primary-color); /* Use variable */
+    color: var(--primary-color);
     margin-bottom: 30px;
 }
 
 #outOfImages {
      display: none; /* Controlled by JS */
      padding: 30px;
-     text-align: center; /* Center content */
+     text-align: center;
 }
 
 #outOfImages p {
     font-size: 1.2em;
     margin-bottom: 20px;
-    color: var(--text-color); /* Use variable */
+    color: var(--text-color);
 }

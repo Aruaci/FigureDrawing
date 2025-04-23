@@ -1,43 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Theme Toggle Logic START ---
-    const themeToggleButton = document.getElementById('themeToggle');
-    const bodyElement = document.body;
-    const moonIcon = '🌙';
-    const sunIcon = '☀️';
+ // --- Theme Selector Logic START ---
+ const themeSelector = document.getElementById('themeSelector');
+ const bodyElement = document.body;
+ // Define ALL theme classes, including dark
+ const themeClasses = ['theme-dark', 'theme-light', 'theme-sepia', 'theme-slate', 'theme-coral-blue']; // Added 'theme-dark'
 
-    // Function to apply theme based on stored preference or system preference
-    const applyTheme = (theme) => {
-        if (theme === 'light') {
-            bodyElement.classList.add('light-mode');
-            if (themeToggleButton) themeToggleButton.textContent = moonIcon;
-        } else {
-            bodyElement.classList.remove('light-mode');
-            if (themeToggleButton) themeToggleButton.textContent = sunIcon;
-        }
-    };
+ // Function to apply the selected theme
+ const applyTheme = (themeValue) => {
+     // Remove any existing theme classes from the list
+     bodyElement.classList.remove(...themeClasses);
 
-    // Function to toggle theme and save preference
-    const toggleTheme = () => {
-        const isLight = bodyElement.classList.contains('light-mode');
-        const newTheme = isLight ? 'dark' : 'light';
-        localStorage.setItem('theme', newTheme); // Save preference
-        applyTheme(newTheme);
-    };
+     // Always add the specific class for the selected theme
+     const newThemeClass = `theme-${themeValue}`; // e.g., theme-dark, theme-light
+     bodyElement.classList.add(newThemeClass);
 
-    // Add event listener to the button
-    if (themeToggleButton) {
-        themeToggleButton.addEventListener('click', toggleTheme);
-    }
+     // Update the dropdown to show the current theme
+     if (themeSelector) {
+         themeSelector.value = themeValue;
+     }
+     // Save the preference
+     localStorage.setItem('theme', themeValue);
+ };
 
-    // Check for saved theme preference on load
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        applyTheme(savedTheme);
-    } else {
-        // Default to dark if no preference saved
-        applyTheme('dark');
-    }
-    // --- Theme Toggle Logic END ---
+ // Add event listener for dropdown changes
+ if (themeSelector) {
+     themeSelector.addEventListener('change', (event) => {
+         const selectedTheme = event.target.value;
+         applyTheme(selectedTheme);
+     });
+ }
+
+ // Check for saved theme preference on load
+ const savedTheme = localStorage.getItem('theme');
+ const initialTheme = savedTheme || 'dark'; // Default to 'dark' if nothing is saved
+ applyTheme(initialTheme);
+ // --- Theme Selector Logic END ---
 
 
     // --- Original Application Logic START ---

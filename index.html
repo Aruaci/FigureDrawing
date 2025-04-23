@@ -9,8 +9,16 @@
 </head>
 <body>
     <div class="container">
-        <button id="themeToggle" class="theme-toggle-button">☀️</button>
-        <h1>Figure Drawing Practice</h1>
+        <div class="theme-selector-wrapper">
+            <label for="themeSelector" class="visually-hidden">Select Theme:</label>
+            <select id="themeSelector" class="theme-selector">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+                <option value="sepia">Sepia</option>
+                <option value="slate">Slate</option>
+                <option value="coral-blue">Coral Blue</option> </select>
+            </select>
+        </div>        <h1>Figure Drawing Practice</h1>
         <form id="startForm">
             <label for="interval">Interval:</label>
             <input type="number" id="interval" name="interval" min="1" required placeholder="seconds">

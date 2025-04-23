@@ -10,7 +10,16 @@
 <body>
     <div class="container">
         <!-- <h1 id="practiceHeader">Figure Drawing Practice</h1> -->
-        <button id="themeToggle" class="theme-toggle-button">☀️</button>
+        <div class="theme-selector-wrapper">
+            <label for="themeSelector" class="visually-hidden">Select Theme:</label>
+            <select id="themeSelector" class="theme-selector">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+                <option value="sepia">Sepia</option>
+                <option value="slate">Slate</option>
+                <option value="coral-blue">Coral Blue</option> </select>
+            </select>
+        </div>
         <div id="imageWrapper">
             <img id="practiceImage" alt="Drawing Practice">
             <div id="overlay"></div> <!-- Overlay for paused state -->
